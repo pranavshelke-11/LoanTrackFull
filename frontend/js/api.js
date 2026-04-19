@@ -4,7 +4,7 @@
 // This file contains ALL the functions that talk to your backend.
 // Instead of faking data, every function now makes a real HTTP request.
 
-const API_URL = 'https://loantrack-backend.onrender.com/';
+const API_URL = 'https://loantrack-backend.onrender.com/api';
 
 // ===== HELPER: Get auth token from storage =====
 function getToken() {
