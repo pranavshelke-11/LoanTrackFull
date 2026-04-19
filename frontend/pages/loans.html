@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoanTrack — My Loans</title>
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="main-content">
+  <header class="topbar">
+    <button class="menu-btn" onclick="toggleSidebar()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="topbar-title">My Loans</div>
+    <div class="topbar-right"><div class="avatar">U</div></div>
+  </header>
+
+  <div class="page-body">
+    <div class="welcome-bar">
+      <div><h2>My Loans</h2><p>Manage and track all your active loans.</p></div>
+      <button class="btn-primary" onclick="showModal()">+ Add New Loan</button>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterLoans('all', this)">All</button>
+      <button class="filter-btn" onclick="filterLoans('active', this)">Active</button>
+      <button class="filter-btn" onclick="filterLoans('closed', this)">Closed</button>
+    </div>
+
+    <!-- Loans Grid (populated by loans.js) -->
+    <div class="loans-grid" id="loansGrid">
+      <p style="color:var(--muted);padding:20px;">Loading loans...</p>
+    </div>
+  </div>
+</div>
+
+<!-- Add Loan Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="hideModal()"></div>
+<div class="modal" id="addLoanModal">
+  <div class="modal-header">
+    <h3>Add New Loan</h3>
+    <button onclick="hideModal()" class="modal-close">&times;</button>
+  </div>
+  <form id="loanForm" onsubmit="addLoan(event)">
+    <div class="form-group">
+      <label>Loan Type</label>
+      <select id="loanType" required>
+        <option value="">Select type</option>
+        <option value="Home Loan">Home Loan</option>
+        <option value="Personal Loan">Personal Loan</option>
+        <option value="Vehicle Loan">Vehicle Loan</option>
+        <option value="Education Loan">Education Loan</option>
+        <option value="Business Loan">Business Loan</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Bank / Lender Name</label>
+      <input type="text" id="bankName" placeholder="e.g. SBI Bank" required>
+    </div>
+    <div class="form-group">
+      <label>Account Number (last 4 digits, optional)</label>
+      <input type="text" id="accountNo" placeholder="e.g. ****4321" maxlength="10">
+    </div>
+    <div class="row-2">
+      <div class="form-group">
+        <label>Principal Amount (₹)</label>
+        <input type="number" id="principal" placeholder="500000" min="1" required>
+      </div>
+      <div class="form-group">
+        <label>Interest Rate (% p.a.)</label>
+        <input type="number" id="interestRate" placeholder="8.5" step="0.1" min="0.1" required>
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="form-group">
+        <label>Tenure (Months)</label>
+        <input type="number" id="tenureMonths" placeholder="120" min="1" required>
+      </div>
+      <div class="form-group">
+        <label>Start Date</label>
+        <input type="date" id="startDate" required>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-ghost" onclick="hideModal()">Cancel</button>
+      <button type="submit" class="btn-primary">Add Loan</button>
+    </div>
+  </form>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/loans.js"></script>
+<script>injectSidebar('loans.html');</script>
+</body>
+</html>

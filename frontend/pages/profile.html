@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoanTrack — Profile</title>
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="main-content">
+  <header class="topbar">
+    <button class="menu-btn" onclick="toggleSidebar()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="topbar-title">Profile</div>
+    <div class="topbar-right"><div class="avatar">U</div></div>
+  </header>
+
+  <div class="page-body">
+    <div class="welcome-bar"><div><h2>My Profile</h2><p>Manage your personal information.</p></div></div>
+
+    <div class="two-col">
+      <!-- Personal Information Card -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Personal Information</h3>
+          <button class="btn-ghost small" onclick="toggleEdit()">Edit</button>
+        </div>
+
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar">U</div>
+          <div>
+            <h3 style="font-size:18px;" id="profileFullName">Loading...</h3>
+            <p class="al" id="profileMemberSince">Member since —</p>
+          </div>
+        </div>
+
+        <!-- View Mode -->
+        <div class="profile-fields" id="viewMode">
+          <div class="profile-field"><span class="al">Full Name</span><span id="profileFullName2">—</span></div>
+          <div class="profile-field"><span class="al">Email</span><span id="profileEmail">—</span></div>
+          <div class="profile-field"><span class="al">Mobile</span><span id="profileMobile">—</span></div>
+          <div class="profile-field"><span class="al">PAN Number</span><span id="profilePAN">—</span></div>
+          <div class="profile-field"><span class="al">Aadhaar</span><span id="profileAadhaar">—</span></div>
+          <div class="profile-field"><span class="al">City</span><span id="profileCity">—</span></div>
+        </div>
+
+        <!-- Edit Mode -->
+        <form class="profile-fields" id="editMode" style="display:none;" onsubmit="saveProfile(event)">
+          <div class="row-2">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" id="editFirstName" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" id="editLastName" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mobile</label>
+            <input type="tel" id="editMobile" placeholder="+91 98765 43210">
+          </div>
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" id="editCity" placeholder="Mumbai, Maharashtra">
+          </div>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn-primary">Save Changes</button>
+            <button type="button" class="btn-ghost" onclick="toggleEdit()">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right Column -->
+      <div style="display:flex;flex-direction:column;gap:20px;">
+
+        <!-- Notification Settings -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Account Settings</h3>
+            <button class="btn-ghost small" onclick="saveSettings()">Save</button>
+          </div>
+          <div class="settings-list">
+            <div class="setting-item">
+              <div>
+                <p style="font-weight:500;font-size:14px;">Email Notifications</p>
+                <p class="al">Get alerts for EMI due dates</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="toggleEmail">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div>
+                <p style="font-weight:500;font-size:14px;">SMS Alerts</p>
+                <p class="al">Receive payment reminders via SMS</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="toggleSMS">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div>
+                <p style="font-weight:500;font-size:14px;">Two-Factor Auth</p>
+                <p class="al">Secure your account with OTP</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="toggle2FA">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Change Password -->
+        <div class="card">
+          <div class="card-header"><h3>Change Password</h3></div>
+          <form onsubmit="changePassword(event)">
+            <div class="form-group">
+              <label>Current Password</label>
+              <input type="password" id="currentPass" placeholder="••••••••" required>
+            </div>
+            <div class="form-group">
+              <label>New Password</label>
+              <input type="password" id="newPass" placeholder="Min 6 characters" required>
+            </div>
+            <div class="form-group">
+              <label>Confirm New Password</label>
+              <input type="password" id="confirmPass" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-primary">Update Password</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/profile.js"></script>
+<script>injectSidebar('profile.html');</script>
+</body>
+</html>
